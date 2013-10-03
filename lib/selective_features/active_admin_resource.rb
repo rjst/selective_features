@@ -8,6 +8,7 @@ module SelectiveFeatures
       index do
         column "Name", :name
         column "Description", :description
+        column "Constraints", :constraints
         column "Active" do |feature|
           status_tag (feature.active ? "Active" : "Inactive"), (feature.active ? :ok : :warning)
         end    
@@ -18,6 +19,7 @@ module SelectiveFeatures
         f.inputs "Details" do
           f.input :name
           f.input :description
+          f.input :constraints          
           f.input :active
         end
         f.buttons

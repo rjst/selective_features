@@ -1,7 +1,7 @@
 module FeatureHelper
 
-  def active_feature?(feature_name)
-    ::Feature.active.find_by_name(feature_name.to_s).present?
+  def enabled_feature?(feature_name, context = nil)
+    Feature.enabled?(feature_name.to_s, context)
   end
 end
 

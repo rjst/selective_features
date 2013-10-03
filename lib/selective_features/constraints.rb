@@ -1,12 +1,11 @@
 class SelectiveFeaturesConstraint
-  def initialize(feature_name)
+  def initialize(feature_name, context = lambda {|request| nil})
     @name = feature_name
+    @context = context
   end
  
   def matches?(request)
-    feature = Feature.find_by_name(@name.to_s)
-    #logger.warning "Feature #{feature} does not exist" if feature.blank?
-    feature.present? and feature.active?
+    Feature.enabled?(@name.to_s, @context.call(request))
   end
 end
 
