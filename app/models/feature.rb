@@ -24,7 +24,7 @@ class Feature < ActiveRecord::Base
     }
     
     
-    self.active? and fb_login_checker.call(context, constraints.split(','))
+    self.active? and fb_login_checker.call(context, constraints.to_s.split(','))
   end
   
   def to_s
