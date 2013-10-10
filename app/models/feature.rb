@@ -20,11 +20,11 @@ class Feature < ActiveRecord::Base
     
     # if a FB login is specified, make sure it's valid. if not specified, it's valid.
     fb_login_checker = lambda {|logged_in_fb_id, allowed_fb_id|
-      ( allowed_fb_id.blank? || logged_in_fb_id == allowed_fb_id )
+      ( allowed_fb_id.empty? || allowed_fb_id.include?(logged_in_fb_id) )
     }
     
     
-    self.active? and fb_login_checker.call(context, constraints)
+    self.active? and fb_login_checker.call(context, constraints.split(','))
   end
   
   def to_s
